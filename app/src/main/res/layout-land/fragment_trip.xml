@@ -31,11 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
-        <CheckBox android:id="@+id/trip_solved"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/trip_solved_label"
-            />
+
     </LinearLayout>
 </LinearLayout>

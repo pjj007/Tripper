@@ -100,7 +100,11 @@ public class TripLab {
         values.put(TripDbSchema.TripTable.Cols.UUID, trip.getId().toString());
         values.put(TripDbSchema.TripTable.Cols.TITLE, trip.getTitle());
         values.put(TripDbSchema.TripTable.Cols.DATE, trip.getDate().getTime());
-        values.put(TripDbSchema.TripTable.Cols.SOLVED, trip.isSolved() ? 1 : 0);
+//        values.put(TripDbSchema.TripTable.Cols.SOLVED, trip.isSolved() ? 1 : 0);
+        values.put(TripDbSchema.TripTable.Cols.TRIP_TYPE, trip.getTripType());
+        values.put(TripDbSchema.TripTable.Cols.DESTINATION, trip.getDestination());
+        values.put(TripDbSchema.TripTable.Cols.DURATION, trip.getDuration());
+        values.put(TripDbSchema.TripTable.Cols.COMMENT, trip.getComment());
 
         return values;
     }

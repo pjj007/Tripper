@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/trip_details_label"
+        android:hint="@string/trip_details_label"
         style="?android:listSeparatorTextViewStyle"
         />
     <Button android:id="@+id/trip_date"
@@ -26,13 +26,36 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         />
-    <CheckBox android:id="@+id/trip_solved"
+    <Spinner
+        android:id="@+id/trip_type_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/trip_type_array">
+    </Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/trip_destination_label"
+        style="?android:listSeparatorTextViewStyle"
+        />
+    <EditText
+        android:id="@+id/trip_destination"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/trip_solved_label"
-        />
+        android:hint="@string/trip_destination_hint"/>
+
+    <EditText
+        android:id="@+id/trip_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/trip_comment_label"/>
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

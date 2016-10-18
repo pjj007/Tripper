@@ -12,7 +12,11 @@ public class Trip {
     private UUID mId;
     private String mTitle;
     private Date mDate;
-    private boolean mSolved;
+//    private boolean mSolved;
+    private String mTripType;
+    private String mDestination;
+    private int mDuration;
+    private String mComment;
 
     public Trip() {
         this(UUID.randomUUID());
@@ -29,12 +33,12 @@ public class Trip {
     public void setDate(Date date) {
         mDate = date;
     }
-    public boolean isSolved() {
-        return mSolved;
-    }
-    public void setSolved(boolean solved) {
-        mSolved = solved;
-    }
+//    public boolean isSolved() {
+//        return mSolved;
+//    }
+//    public void setSolved(boolean solved) {
+//        mSolved = solved;
+//    }
 
     public UUID getId() {
         return mId;
@@ -45,4 +49,36 @@ public class Trip {
     public void setTitle(String title) {
         mTitle = title;
     }
+
+    public String getTripType() {
+        return mTripType;
+    }
+
+    public void setTripType(String TripType) {
+        mTripType = TripType;
+    }
+
+    public String getDestination() {
+        return mDestination;
+    }
+
+    public void setDestination(String Destination) {
+        mDestination = Destination;
+    }
+
+    public int getDuration() {
+        return mDuration;
+    }
+
+    public void setDuration(int Duration) {
+        mDuration = Duration;
+    }
+
+    public String getComment() {
+        return mComment;
+    }
+    public void setComment(String Comment) {
+        mComment = Comment;
+    }
+
 }

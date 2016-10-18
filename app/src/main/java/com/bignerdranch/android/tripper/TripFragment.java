@@ -25,7 +25,11 @@ public class TripFragment extends Fragment {
     private Trip mTrip;
     private EditText mTitleField;
     private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
+//    private CheckBox mSolvedCheckBox;
+    // private Spinner mTripType;
+    private EditText mDestination;
+    private EditText mDuration;
+    private EditText mComment;
 
     public static TripFragment newInstance(UUID tripId) {
         Bundle args = new Bundle();
@@ -80,16 +84,74 @@ public class TripFragment extends Fragment {
 
         mDateButton = (Button)v.findViewById(R.id.trip_date);
         mDateButton.setText(mTrip.getDate().toString());
-        mDateButton.setEnabled(false);mSolvedCheckBox = (CheckBox)v.findViewById(R.id.trip_solved);
-        mSolvedCheckBox.setChecked(mTrip.isSolved());
+        mDateButton.setEnabled(false);
+//        mSolvedCheckBox = (CheckBox)v.findViewById(R.id.trip_solved);
+//        mSolvedCheckBox.setChecked(mTrip.isSolved());
+//
+//        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//
+//                mTrip.setSolved(isChecked);
+//            }
+//        });
 
-        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mComment = (EditText)v.findViewById(R.id.trip_comment);
+        mComment.setText(mTrip.getComment());
+        mComment.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void beforeTextChanged(
+                    CharSequence s, int start, int count, int after) {
 
-                mTrip.setSolved(isChecked);
+            }
+            @Override
+            public void onTextChanged(
+                    CharSequence s, int start, int before, int count) {
+                mTrip.setComment(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
+
+        mDestination = (EditText)v.findViewById(R.id.trip_destination);
+        mDestination.setText(mTrip.getDestination());
+        mDestination.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(
+                    CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(
+                    CharSequence s, int start, int before, int count) {
+                mTrip.setDestination(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+//        mTripType = (Spinner)v.findViewById(R.id.trip_type_spinner);
+//        mTripType.setAdapter(mTrip.getTripType());
+//        mTripType.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(
+//                    CharSequence s, int start, int count, int after) {
+//
+//            }
+//            @Override
+//            public void onTextChanged(
+//                    CharSequence s, int start, int before, int count) {
+//                mTrip.setTripType(s.toString());
+//            }
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
         return v;
     }

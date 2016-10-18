@@ -3,6 +3,7 @@ package com.bignerdranch.android.tripper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class TripListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_trip, container, false);
+        View view = inflater.inflate(R.layout.fragment_trip_list, container, false);
         mTripRecyclerView = (RecyclerView) view
                 .findViewById(R.id.trip_recycler_view);
         mTripRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -78,7 +79,7 @@ public class TripListFragment extends Fragment {
         private Trip mTrip;
         private TextView mTitleTextView;
         private TextView mDateTextView;
-        private CheckBox mSolvedCheckBox;
+//        private CheckBox mSolvedCheckBox;
 
         public TripHolder(View itemView) {
 
@@ -86,14 +87,14 @@ public class TripListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_trip_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_trip_date_text_view);
-            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_trip_solved_check_box);
+//            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_trip_solved_check_box);
         }
 
         public void bindTrip(Trip trip) {
             mTrip = trip;
             mTitleTextView.setText(mTrip.getTitle());
             mDateTextView.setText(mTrip.getDate().toString());
-            mSolvedCheckBox.setChecked(mTrip.isSolved());
+//            mSolvedCheckBox.setChecked(mTrip.isSolved());
         }
 
         public void onClick(View v) {
