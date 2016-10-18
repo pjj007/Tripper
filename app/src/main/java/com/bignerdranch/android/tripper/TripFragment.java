@@ -7,10 +7,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.UUID;
 
@@ -18,15 +21,15 @@ import java.util.UUID;
  * Created by PJ Jensen on 18/10/2016.
  */
 
-public class TripFragment extends Fragment {
+public class TripFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final String ARG_TRIP_ID = "trip_id";
 
     private Trip mTrip;
     private EditText mTitleField;
     private Button mDateButton;
-//    private CheckBox mSolvedCheckBox;
-    // private Spinner mTripType;
+    //    private CheckBox mSolvedCheckBox;
+    private Spinner mTripType;
     private EditText mDestination;
     private EditText mDuration;
     private EditText mComment;
@@ -62,7 +65,7 @@ public class TripFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_trip, container, false);
 
-        mTitleField = (EditText)v.findViewById(R.id.trip_title);
+        mTitleField = (EditText) v.findViewById(R.id.trip_title);
         mTitleField.setText(mTrip.getTitle());
 
         mTitleField.addTextChangedListener(new TextWatcher() {
@@ -71,18 +74,20 @@ public class TripFragment extends Fragment {
                     CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
                 mTrip.setTitle(s.toString());
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
 
-        mDateButton = (Button)v.findViewById(R.id.trip_date);
+        mDateButton = (Button) v.findViewById(R.id.trip_date);
         mDateButton.setText(mTrip.getDate().toString());
         mDateButton.setEnabled(false);
 //        mSolvedCheckBox = (CheckBox)v.findViewById(R.id.trip_solved);
@@ -96,7 +101,7 @@ public class TripFragment extends Fragment {
 //            }
 //        });
 
-        mComment = (EditText)v.findViewById(R.id.trip_comment);
+        mComment = (EditText) v.findViewById(R.id.trip_comment);
         mComment.setText(mTrip.getComment());
         mComment.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,18 +109,20 @@ public class TripFragment extends Fragment {
                     CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
                 mTrip.setComment(s.toString());
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
 
-        mDestination = (EditText)v.findViewById(R.id.trip_destination);
+        mDestination = (EditText) v.findViewById(R.id.trip_destination);
         mDestination.setText(mTrip.getDestination());
         mDestination.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,37 +130,63 @@ public class TripFragment extends Fragment {
                     CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
                 mTrip.setDestination(s.toString());
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
 
-//        mTripType = (Spinner)v.findViewById(R.id.trip_type_spinner);
-//        mTripType.setAdapter(mTrip.getTripType());
-//        mTripType.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(
-//                    CharSequence s, int start, int count, int after) {
-//
-//            }
-//            @Override
-//            public void onTextChanged(
-//                    CharSequence s, int start, int before, int count) {
-//                mTrip.setTripType(s.toString());
-//            }
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+
+        mDuration = (EditText) v.findViewById(R.id.trip_duration);
+        mDuration.setText(mTrip.getDuration());
+        mDuration.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(
+                    CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(
+                    CharSequence s, int start, int before, int count) {
+                mTrip.setDuration(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        mTripType = (Spinner) v.findViewById(R.id.trip_type_spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.trip_type_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+// Apply the adapter to the spinner
+        mTripType.setAdapter(adapter);
+
 
         return v;
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        Spinner spinner = (Spinner) view.findViewById(R.id.trip_type_spinner);
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
 }

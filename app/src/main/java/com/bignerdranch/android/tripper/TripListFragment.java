@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,6 +29,12 @@ public class TripListFragment extends Fragment {
     private Button mNewButton;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trip_list, container, false);
@@ -34,18 +43,18 @@ public class TripListFragment extends Fragment {
         mTripRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        mNewButton = (Button) view.findViewById(R.id.new_trip_button);
-        mNewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Trip trip = new Trip();
-                TripLab.get(getActivity()).addTrip(trip);
-                Intent intent = MainActivity.newIntent(getActivity(), trip.getId());
-                startActivity(intent);
-
-            }
-        });
+//        mNewButton = (Button) view.findViewById(R.id.new_trip_button);
+//        mNewButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Trip trip = new Trip();
+//                TripLab.get(getActivity()).addTrip(trip);
+//                Intent intent = MainActivity.newIntent(getActivity(), trip.getId());
+//                startActivity(intent);
+//
+//            }
+//        });
 
         updateUI();
 
@@ -56,6 +65,28 @@ public class TripListFragment extends Fragment {
         super.onResume();
         updateUI();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_trip_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_new_trip:
+                Trip trip = new Trip();
+                TripLab.get(getActivity()).addTrip(trip);
+                Intent intent = MainActivity
+                        .newIntent(getActivity(), trip.getId());
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private void updateUI() {
         TripLab tripLab = TripLab.get(getActivity());
@@ -79,6 +110,7 @@ public class TripListFragment extends Fragment {
         private Trip mTrip;
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private TextView mDestinationTextView;
 //        private CheckBox mSolvedCheckBox;
 
         public TripHolder(View itemView) {
@@ -87,13 +119,16 @@ public class TripListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_trip_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_trip_date_text_view);
+            mDestinationTextView = (TextView) itemView.findViewById(R.id.list_item_trip_destination_text_view);
 //            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_trip_solved_check_box);
+
         }
 
         public void bindTrip(Trip trip) {
             mTrip = trip;
             mTitleTextView.setText(mTrip.getTitle());
             mDateTextView.setText(mTrip.getDate().toString());
+            mDestinationTextView.setText(mTrip.getDestination());
 //            mSolvedCheckBox.setChecked(mTrip.isSolved());
         }
 

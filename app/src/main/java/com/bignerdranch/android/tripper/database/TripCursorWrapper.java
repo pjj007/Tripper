@@ -25,7 +25,7 @@ public class TripCursorWrapper extends CursorWrapper {
 //        int isSolved = getInt(getColumnIndex(TripDbSchema.TripTable.Cols.SOLVED));
         String tripType = getString(getColumnIndex(TripDbSchema.TripTable.Cols.TRIP_TYPE));
         String destination = getString(getColumnIndex(TripDbSchema.TripTable.Cols.DESTINATION));
-        int duration = getInt(getColumnIndex(TripDbSchema.TripTable.Cols.DURATION));
+        String duration = getString(getColumnIndex(TripDbSchema.TripTable.Cols.DURATION));
         String comment = getString(getColumnIndex(TripDbSchema.TripTable.Cols.COMMENT));
 
         Trip trip = new Trip(UUID.fromString(uuidString));

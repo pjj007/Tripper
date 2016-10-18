@@ -15,7 +15,7 @@ public class Trip {
 //    private boolean mSolved;
     private String mTripType;
     private String mDestination;
-    private int mDuration;
+    private String mDuration;
     private String mComment;
 
     public Trip() {
@@ -66,11 +66,11 @@ public class Trip {
         mDestination = Destination;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return mDuration;
     }
 
-    public void setDuration(int Duration) {
+    public void setDuration(String Duration) {
         mDuration = Duration;
     }
 

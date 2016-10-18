@@ -26,6 +26,13 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/trip_type_label"
+        style="?android:listSeparatorTextViewStyle"
+        />
+
     <Spinner
         android:id="@+id/trip_type_spinner"
         android:layout_width="match_parent"
@@ -47,14 +54,35 @@
         android:layout_marginRight="16dp"
         android:hint="@string/trip_destination_hint"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/trip_duration_label"
+        style="?android:listSeparatorTextViewStyle"
+        />
+
+    <EditText
+        android:id="@+id/trip_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/trip_duration_hint"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/trip_comment_label"
+        style="?android:listSeparatorTextViewStyle"
+        />
+
     <EditText
         android:id="@+id/trip_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/trip_comment_label"/>
-
+        android:hint="@string/trip_comment_hint"/>
 
     <Button
         android:layout_width="match_parent"
