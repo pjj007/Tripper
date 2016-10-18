@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Tripper</string>
+    <string name="app_name">Trip Logger</string>
+    <string name="trip_title_hint">Enter a title for the trip.</string>
+    <string name="trip_title_label">Title</string>
+    <string name="trip_details_label">Details</string>
+    <string name="trip_solved_label">Completed</string>
+    <string name="trip_add_label">Logs</string>
+    <string name="trip_settings">Settings</string>
+    <string name="trip_delete_label">Delete</string>
 </resources>
