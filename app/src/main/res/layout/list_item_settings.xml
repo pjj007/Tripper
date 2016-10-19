@@ -1,36 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
+
     <TextView
-        android:id="@+id/list_item_trip_title_text_view"
+        android:id="@+id/list_item_settings_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
 
         android:textStyle="bold"
         android:padding="4dp"
-        tools:text="Trip Title"/>
+        tools:text="Author Name"/>
 
     <TextView
-        android:id="@+id/list_item_trip_date_text_view"
+        android:id="@+id/list_item_settings_sid_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:layout_below="@+id/list_item_trip_title_text_view"
         android:padding="4dp"
-        tools:text="Trip Date"/>
+        tools:text="Author ID"/>
 
     <TextView
-        android:id="@+id/list_item_trip_destination_text_view"
+        android:id="@+id/list_item_settings_email_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:textStyle="bold"
         android:padding="4dp"
-        tools:text="Trip Destination"/>
+        tools:text="Email"/>
+
+    <TextView
+        android:id="@+id/list_item_settings_gender_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:padding="4dp"
+        tools:text="Gender"/>
+
+    <TextView
+        android:id="@+id/list_item_settings_comment_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:padding="4dp"
+        tools:text="Comment"/>
 
 </LinearLayout>

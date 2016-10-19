@@ -95,6 +95,15 @@ public class TripLab {
                 new String[] {uuidString});
     }
 
+    public void deleteTrip (Trip trip) {
+        String uuidString = trip.getId().toString();
+        mDatabase.delete(
+                TripDbSchema.TripTable.NAME,
+                TripDbSchema.TripTable.Cols.UUID + " = ?",
+                new String[] {uuidString}
+        );
+    }
+
     private static ContentValues getContentValues(Trip trip) {
         ContentValues values = new ContentValues();
         values.put(TripDbSchema.TripTable.Cols.UUID, trip.getId().toString());

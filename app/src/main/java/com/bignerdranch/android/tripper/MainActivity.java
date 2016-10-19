@@ -16,11 +16,13 @@ public class MainActivity extends SingleFragmentActivity {
         return intent;
     }
 
+
     @Override
     protected Fragment createFragment() {
 
         UUID tripId = (UUID) getIntent().getSerializableExtra(EXTRA_TRIP_ID);
         return TripFragment.newInstance(tripId);
+
 
     }
 }

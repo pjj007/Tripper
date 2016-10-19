@@ -10,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -33,6 +32,9 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     private EditText mDestination;
     private EditText mDuration;
     private EditText mComment;
+    private Button mDeleteButton;
+    private Button mSaveButton;
+    private Button mCancelButton;
 
     public static TripFragment newInstance(UUID tripId) {
         Bundle args = new Bundle();
@@ -47,7 +49,6 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         UUID tripId = (UUID) getActivity().getIntent().getSerializableExtra(MainActivity.EXTRA_TRIP_ID);
         mTrip = TripLab.get(getActivity()).getTrip(tripId);
@@ -90,6 +91,41 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
         mDateButton = (Button) v.findViewById(R.id.trip_date);
         mDateButton.setText(mTrip.getDate().toString());
         mDateButton.setEnabled(false);
+
+
+        mDeleteButton = (Button) v.findViewById(R.id.trip_delete);
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),
+                        R.string.delete_toast, Toast.LENGTH_SHORT).show();
+                TripLab.get(getActivity()).deleteTrip(mTrip);
+                getActivity().finish();
+            }
+        });
+
+
+        mSaveButton = (Button) v.findViewById(R.id.trip_save);
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),
+                        R.string.save_toast, Toast.LENGTH_SHORT).show();
+                TripLab.get(getActivity()).updateTrip(mTrip);
+                getActivity().finish();
+            }
+        });
+
+        mCancelButton = (Button) v.findViewById(R.id.trip_cancel) ;
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TripLab.get(getActivity()).deleteTrip(mTrip);
+                getActivity().finish();
+            }
+        });
+
+
 //        mSolvedCheckBox = (CheckBox)v.findViewById(R.id.trip_solved);
 //        mSolvedCheckBox.setChecked(mTrip.isSolved());
 //

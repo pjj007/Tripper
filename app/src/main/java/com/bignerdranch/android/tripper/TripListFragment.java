@@ -3,7 +3,6 @@ package com.bignerdranch.android.tripper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -70,6 +68,7 @@ public class TripListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_trip_list, menu);
+        inflater.inflate(R.menu.fragment_settings_list, menu);
     }
 
     @Override
@@ -81,6 +80,13 @@ public class TripListFragment extends Fragment {
                 Intent intent = MainActivity
                         .newIntent(getActivity(), trip.getId());
                 startActivity(intent);
+                return true;
+            case R.id.menu_item_settings_trip:
+
+                SettingsLab.get(getActivity());
+                Intent intent1 = SettingsActivity
+                        .newIntent(getActivity());
+                startActivity(intent1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
