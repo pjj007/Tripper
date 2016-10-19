@@ -14,10 +14,8 @@ public class SettingsDbSchema {
             public static final String NAME = "name";
             public static final String SID = "student_id";
             public static final String EMAIL = "email";
-            //            public static final String SOLVED = "solved";
             public static final String GENDER = "gender";
             public static final String COMMENT = "comment";
-//            public static final String PHOTO = "photo";
 
         }
     }

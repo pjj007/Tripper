@@ -28,6 +28,12 @@ public class SettingsBaseHelper extends SQLiteOpenHelper{
                         SettingsDbSchema.SettingsTable.Cols.GENDER + ", " +
                         SettingsDbSchema.SettingsTable.Cols.COMMENT + ")"
         );
+        db.execSQL("insert into " + SettingsDbSchema.SettingsTable.NAME +
+        // INSERT INTO SettingsTable (NAME, SID, EMAIL, GENDER, COMMENT)
+                " VALUES (null,'9a45128d-41af-48e7-aa4e-9f28cd870c46', 'PJensen', '007', 'Male', " +
+                "'pjj@hotmail.com', 'MobileAppStudio')");
+
+
     }
 
     @Override
