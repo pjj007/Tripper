@@ -27,6 +27,12 @@
     <string name="settings_gender_label">Gender</string>
     <string name="settings_comment_label">Comment</string>
 
+    <string name="settings_name_hint">Name</string>
+    <string name="settings_id_hint">ID</string>
+    <string name="settings_email_hint">Email</string>
+    <string name="settings_gender_hint">Gender</string>
+    <string name="settings_comment_hint">Comment</string>
+
     <string-array name="trip_type_array">
         <item name="spinner_entry_work">Work</item>
         <item name="spinner_entry_personal">Personal</item>

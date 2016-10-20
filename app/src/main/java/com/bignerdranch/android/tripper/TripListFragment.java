@@ -82,10 +82,10 @@ public class TripListFragment extends Fragment {
                 startActivity(intent);
                 return true;
             case R.id.menu_item_settings_trip:
-
-                SettingsLab.get(getActivity());
+                Settings settings = new Settings();
+                SettingsLab.get(getActivity()).addSettings(settings);
                 Intent intent1 = SettingsActivity
-                        .newIntent(getActivity());
+                        .newIntent(getActivity(), settings.getId());
                 startActivity(intent1);
                 return true;
             default:

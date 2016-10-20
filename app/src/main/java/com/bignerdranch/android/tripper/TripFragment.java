@@ -1,6 +1,12 @@
 package com.bignerdranch.android.tripper;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,9 +17,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.UUID;
 
 /**
@@ -23,6 +32,7 @@ import java.util.UUID;
 public class TripFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final String ARG_TRIP_ID = "trip_id";
+    private static final int REQUEST_PHOTO = 2;
 
     private Trip mTrip;
     private EditText mTitleField;
@@ -35,6 +45,10 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     private Button mDeleteButton;
     private Button mSaveButton;
     private Button mCancelButton;
+    private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
+    private File mPhotoFile;
+
 
     public static TripFragment newInstance(UUID tripId) {
         Bundle args = new Bundle();
@@ -45,15 +59,6 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
         return fragment;
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        UUID tripId = (UUID) getActivity().getIntent().getSerializableExtra(MainActivity.EXTRA_TRIP_ID);
-        mTrip = TripLab.get(getActivity()).getTrip(tripId);
-    }
-
     @Override
     public void onPause() {
         super.onPause();
@@ -62,13 +67,24 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        UUID tripId = (UUID) getActivity().getIntent().getSerializableExtra(MainActivity.EXTRA_TRIP_ID);
+        mTrip = TripLab.get(getActivity()).getTrip(tripId);
+
+        mPhotoFile = TripLab.get(getActivity()).getPhotoFile(mTrip);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_trip, container, false);
+        View f = inflater.inflate(R.layout.view_camera_and_title, container, false);
 
-        mTitleField = (EditText) v.findViewById(R.id.trip_title);
+        mTitleField = (EditText) f.findViewById(R.id.trip_title);
         mTitleField.setText(mTrip.getTitle());
-
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
@@ -212,7 +228,50 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
         mTripType.setAdapter(adapter);
 
 
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        mPhotoButton = (ImageButton) v.findViewById(R.id.trip_camera);
+        final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        boolean canTakePhoto = mPhotoFile != null &&
+                captureImage.resolveActivity(packageManager) != null;
+        mPhotoButton.setEnabled(canTakePhoto);
+
+        if (canTakePhoto) {
+            Uri uri = Uri.fromFile(mPhotoFile);
+            captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        }
+
+        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(captureImage, REQUEST_PHOTO);
+            }
+        });
+
+        mPhotoView = (ImageView) v.findViewById(R.id.trip_photo);
+        updatePhotoView();
+
+
         return v;
+    }
+
+    private void updatePhotoView() {
+        if (mPhotoFile == null || mPhotoFile.exists()) {
+            mPhotoView.setImageDrawable(null);
+        } else {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            mPhotoView.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        } else if (requestCode == REQUEST_PHOTO) {
+            updatePhotoView();
+        }
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,

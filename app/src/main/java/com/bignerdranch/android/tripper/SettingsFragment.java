@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.UUID;
 
 /**
  * Created by Paul J Jensen on 19/10/2016.
@@ -25,10 +28,20 @@ public class SettingsFragment extends Fragment {
     private EditText mGender;
     private EditText mComment;
 
-    public static SettingsFragment newInstance() {
+    public static SettingsFragment newInstance(UUID settingsId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_SETTINGS_ID, settingsId);
 
         SettingsFragment fragment = new SettingsFragment();
+        fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        SettingsLab.get(getActivity()).updateSettings(mSettings);
     }
 
     @Override
@@ -84,7 +97,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        mEmail = (EditText) v.findViewById(R.id.settings_id);
+        mEmail = (EditText) v.findViewById(R.id.settings_email);
         mEmail.setText(mSettings.getEmail());
         mEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -105,7 +118,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        mGender = (EditText) v.findViewById(R.id.settings_id);
+        mGender = (EditText) v.findViewById(R.id.settings_gender);
         mGender.setText(mSettings.getGender());
         mGender.addTextChangedListener(new TextWatcher() {
             @Override
@@ -126,7 +139,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        mComment = (EditText) v.findViewById(R.id.settings_id);
+        mComment = (EditText) v.findViewById(R.id.settings_comment);
         mComment.setText(mSettings.getComment());
         mComment.addTextChangedListener(new TextWatcher() {
             @Override

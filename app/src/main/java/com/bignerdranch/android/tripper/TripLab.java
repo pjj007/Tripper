@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 
 import com.bignerdranch.android.tripper.database.TripBaseHelper;
 import com.bignerdranch.android.tripper.database.TripCursorWrapper;
 import com.bignerdranch.android.tripper.database.TripDbSchema;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -78,6 +80,16 @@ public class TripLab {
 //        return null;
     }
 
+    public File getPhotoFile(Trip trip) {
+        File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if (externalFilesDir == null) {
+            return null;
+        }
+
+        return new File(externalFilesDir, trip.getPhotoFilename());
+    }
+
     public void addTrip (Trip t) {
 
         ContentValues values = getContentValues(t);
@@ -109,7 +121,6 @@ public class TripLab {
         values.put(TripDbSchema.TripTable.Cols.UUID, trip.getId().toString());
         values.put(TripDbSchema.TripTable.Cols.TITLE, trip.getTitle());
         values.put(TripDbSchema.TripTable.Cols.DATE, trip.getDate().getTime());
-//        values.put(TripDbSchema.TripTable.Cols.SOLVED, trip.isSolved() ? 1 : 0);
         values.put(TripDbSchema.TripTable.Cols.TRIP_TYPE, trip.getTripType());
         values.put(TripDbSchema.TripTable.Cols.DESTINATION, trip.getDestination());
         values.put(TripDbSchema.TripTable.Cols.DURATION, trip.getDuration());
@@ -118,7 +129,6 @@ public class TripLab {
         return values;
     }
     private TripCursorWrapper queryTrips(String whereClause, String[] whereArgs){
-//    private Cursor queryTrips(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 TripDbSchema.TripTable.NAME,
                 null, // Columns - null selects all columns

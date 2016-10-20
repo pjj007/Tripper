@@ -7,28 +7,33 @@
         android:id="@+id/settings_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_name_label"/>
+        android:text="@string/settings_name_label"
+        android:hint="@string/settings_name_hint"/>
 
     <EditText
         android:id="@+id/settings_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_id_label"/>
+        android:text="@string/settings_id_label"
+        android:hint="@string/settings_id_hint"/>
     <EditText
         android:id="@+id/settings_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_email_label"/>
+        android:text="@string/settings_email_label"
+        android:hint="@string/settings_email_hint"/>
     <EditText
         android:id="@+id/settings_gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_gender_label"/>
+        android:text="@string/settings_gender_label"
+        android:hint="@string/settings_gender_hint"/>
     <EditText
         android:id="@+id/settings_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_comment_label"/>
+        android:text="@string/settings_comment_label"
+        android:hint="@string/settings_comment_hint"/>
 
 
 </LinearLayout>
