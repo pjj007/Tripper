@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ public class SettingsFragment extends Fragment {
 
     private Settings mSettings;
     private EditText mName;
-    private EditText mId;
+    private EditText mSid;
     private EditText mEmail;
     private EditText mGender;
     private EditText mComment;
@@ -76,9 +75,9 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        mId = (EditText) v.findViewById(R.id.settings_id);
-        mId.setText(mSettings.getName());
-        mId.addTextChangedListener(new TextWatcher() {
+        mSid = (EditText) v.findViewById(R.id.settings_sid);
+        mSid.setText(mSettings.getName());
+        mSid.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {

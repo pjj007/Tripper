@@ -104,6 +104,7 @@ public class SettingsLab  {
         ContentValues values = new ContentValues();
         values.put(SettingsDbSchema.SettingsTable.Cols.UUID, setting.getId().toString());
         values.put(SettingsDbSchema.SettingsTable.Cols.NAME, setting.getName());
+        values.put(SettingsDbSchema.SettingsTable.Cols.SID, setting.getSID());
         values.put(SettingsDbSchema.SettingsTable.Cols.EMAIL, setting.getEmail());
         values.put(SettingsDbSchema.SettingsTable.Cols.GENDER, setting.getGender());
         values.put(SettingsDbSchema.SettingsTable.Cols.COMMENT, setting.getComment());

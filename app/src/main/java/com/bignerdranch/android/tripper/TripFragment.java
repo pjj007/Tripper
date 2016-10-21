@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ import java.util.UUID;
 public class TripFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final String ARG_TRIP_ID = "trip_id";
-    private static final int REQUEST_PHOTO = 2;
+    private static final int REQUEST_PHOTO = 0;
 
     private Trip mTrip;
     private EditText mTitleField;
@@ -48,6 +49,7 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private File mPhotoFile;
+
 
 
     public static TripFragment newInstance(UUID tripId) {
@@ -83,7 +85,7 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
         View v = inflater.inflate(R.layout.fragment_trip, container, false);
         View f = inflater.inflate(R.layout.view_camera_and_title, container, false);
 
-        mTitleField = (EditText) f.findViewById(R.id.trip_title);
+        mTitleField = (EditText) v.findViewById(R.id.trip_title);
         mTitleField.setText(mTrip.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,12 +97,13 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mTrip.setTitle(s.toString());
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                mTrip.setTitle(s.toString());
+                Log.d("aaaaa", "on text change" + mTrip.getTitle());
             }
         });
 
@@ -142,16 +145,6 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
         });
 
 
-//        mSolvedCheckBox = (CheckBox)v.findViewById(R.id.trip_solved);
-//        mSolvedCheckBox.setChecked(mTrip.isSolved());
-//
-//        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//
-//                mTrip.setSolved(isChecked);
-//            }
-//        });
 
         mComment = (EditText) v.findViewById(R.id.trip_comment);
         mComment.setText(mTrip.getComment());
@@ -283,5 +276,8 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
+
+
+
 
 }

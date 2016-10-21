@@ -22,13 +22,13 @@
     <string name="new_trip">New Trip</string>
 
     <string name="settings_name_label">Name</string>
-    <string name="settings_id_label">ID</string>
+    <string name="settings_sid_label">ID</string>
     <string name="settings_email_label">Email</string>
     <string name="settings_gender_label">Gender</string>
     <string name="settings_comment_label">Comment</string>
 
     <string name="settings_name_hint">Name</string>
-    <string name="settings_id_hint">ID</string>
+    <string name="settings_sid_hint">ID</string>
     <string name="settings_email_hint">Email</string>
     <string name="settings_gender_hint">Gender</string>
     <string name="settings_comment_hint">Comment</string>

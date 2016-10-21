@@ -1,5 +1,6 @@
 package com.bignerdranch.android.tripper;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,6 +18,19 @@ public class Trip {
     private String mDestination;
     private String mDuration;
     private String mComment;
+
+    private ArrayList<String> mTripTypeList = new ArrayList<>();
+
+//    public TripType() {
+//        mTripTypeList.add("Work");
+//        mTripTypeList.add("Personal");
+//        mTripTypeList.add("Commute");
+//    }
+
+    public int getTripTypeList() {
+        return mTripTypeList.indexOf(mTripType);
+    }
+
 
     public Trip() {
         this(UUID.randomUUID());
@@ -54,8 +68,12 @@ public class Trip {
         return mTripType;
     }
 
-    public void setTripType(String TripType) {
-        mTripType = TripType;
+    public void setTripType(int TripType) {
+        mTripType = mTripTypeList.get(TripType);
+    }
+
+    public void setTripType(String tripType) {
+        mTripType = tripType;
     }
 
     public String getDestination() {

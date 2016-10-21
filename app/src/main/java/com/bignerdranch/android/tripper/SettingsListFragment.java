@@ -48,7 +48,6 @@ public class SettingsListFragment extends Fragment {
             mAdapter.setSettings(settings);
             mAdapter.notifyDataSetChanged();
         }
-//        updateSubtitle();
     }
 
 
@@ -98,7 +97,7 @@ public class SettingsListFragment extends Fragment {
         private Settings mSettings;
 
         private TextView mNameTextView;
-        private TextView mIdTextView;
+        private TextView mSidTextView;
         private TextView mEmailTextView;
         private TextView mGenderTextView;
         private TextView mCommentTextView;
@@ -108,7 +107,7 @@ public class SettingsListFragment extends Fragment {
             super(itemView);
             itemView.setOnClickListener(this);
             mNameTextView = (TextView) itemView.findViewById(R.id.list_item_settings_name_text_view);
-            mIdTextView = (TextView) itemView.findViewById(R.id.list_item_settings_sid_text_view);
+            mSidTextView = (TextView) itemView.findViewById(R.id.list_item_settings_sid_text_view);
             mEmailTextView = (TextView) itemView.findViewById(R.id.list_item_settings_email_text_view);
             mGenderTextView = (TextView) itemView.findViewById(R.id.list_item_settings_gender_text_view);
             mCommentTextView = (TextView) itemView.findViewById(R.id.list_item_settings_comment_text_view);
@@ -117,7 +116,7 @@ public class SettingsListFragment extends Fragment {
         public void bindSettings(Settings settings) {
             mSettings = settings;
             mNameTextView.setText(mSettings.getName());
-            mIdTextView.setText(mSettings.getSID());
+            mSidTextView.setText(mSettings.getSID());
             mEmailTextView.setText(mSettings.getEmail());
             mGenderTextView.setText(mSettings.getGender());
             mCommentTextView.setText(mSettings.getComment());

@@ -11,11 +11,11 @@
         android:hint="@string/settings_name_hint"/>
 
     <EditText
-        android:id="@+id/settings_id"
+        android:id="@+id/settings_sid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_id_label"
-        android:hint="@string/settings_id_hint"/>
+        android:text="@string/settings_sid_label"
+        android:hint="@string/settings_sid_hint"/>
     <EditText
         android:id="@+id/settings_email"
         android:layout_width="match_parent"

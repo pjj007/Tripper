@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.Log;
 
 import com.bignerdranch.android.tripper.database.TripBaseHelper;
 import com.bignerdranch.android.tripper.database.TripCursorWrapper;
@@ -99,6 +100,7 @@ public class TripLab {
     }
 
     public void updateTrip(Trip trip) {
+        Log.d("aa", "updateTrip: " + trip.getTitle());
         String uuidString = trip.getId().toString();
         ContentValues values = getContentValues(trip);
 

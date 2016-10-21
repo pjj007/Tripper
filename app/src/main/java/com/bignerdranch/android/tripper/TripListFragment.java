@@ -105,11 +105,9 @@ public class TripListFragment extends Fragment {
             mAdapter.setTrips(trips);
             mAdapter.notifyDataSetChanged();
         }
-//        updateSubtitle();
     }
 
-//    private void updateSubtitle() {
-//    }
+
 
     private class TripHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -117,7 +115,7 @@ public class TripListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private TextView mDestinationTextView;
-//        private CheckBox mSolvedCheckBox;
+
 
         public TripHolder(View itemView) {
 
@@ -126,7 +124,6 @@ public class TripListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_trip_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_trip_date_text_view);
             mDestinationTextView = (TextView) itemView.findViewById(R.id.list_item_trip_destination_text_view);
-//            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_trip_solved_check_box);
 
         }
 
@@ -135,7 +132,6 @@ public class TripListFragment extends Fragment {
             mTitleTextView.setText(mTrip.getTitle());
             mDateTextView.setText(mTrip.getDate().toString());
             mDestinationTextView.setText(mTrip.getDestination());
-//            mSolvedCheckBox.setChecked(mTrip.isSolved());
         }
 
         public void onClick(View v) {

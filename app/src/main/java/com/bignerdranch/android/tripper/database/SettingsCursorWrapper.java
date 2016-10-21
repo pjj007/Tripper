@@ -27,8 +27,8 @@ public class SettingsCursorWrapper extends CursorWrapper {
 
         Settings setting = new Settings(UUID.fromString(uuidString));
         setting.setName(name);
-        setting.setEmail(email);
         setting.setSID(SID);
+        setting.setEmail(email);
         setting.setGender(gender);
         setting.setComment(comment);
 
