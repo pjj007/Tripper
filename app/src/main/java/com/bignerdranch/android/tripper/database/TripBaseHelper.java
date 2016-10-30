@@ -24,7 +24,6 @@ public class TripBaseHelper extends SQLiteOpenHelper {
                 TripDbSchema.TripTable.Cols.UUID + ", " +
                 TripDbSchema.TripTable.Cols.TITLE + ", " +
                 TripDbSchema.TripTable.Cols.DATE + ", " +
-//                TripDbSchema.TripTable.Cols.SOLVED + ", " +
                 TripDbSchema.TripTable.Cols.TRIP_TYPE + ", " +
                 TripDbSchema.TripTable.Cols.DESTINATION + ", " +
                 TripDbSchema.TripTable.Cols.DURATION + ", " +

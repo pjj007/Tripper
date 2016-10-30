@@ -37,18 +37,20 @@ import static android.content.ContentValues.TAG;
 
 /**
  * Created by PJ Jensen on 18/10/2016.
+ * references: https://developers.google.com/maps/documentation/android-api/intents
+ * references: Phillips, B, Stewart, C, Hardy, B & Marsicano, K 2015, Android Programming: The Big Nerd Ranch Guide, Pearson, Arizona, GA.
+ * references: http://stackoverflow.com/questions/3990110/how-to-show-marker-in-maps-launched-by-geo-uri-intent/9825296#9825296
  */
 
-public class TripFragment extends Fragment implements AdapterView.OnItemSelectedListener, GoogleApiClient.ConnectionCallbacks {
+
+public class TripFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final String ARG_TRIP_ID = "trip_id";
     private static final int REQUEST_PHOTO = 0;
-    private static final int REQUEST_ERROR = 1;
 
     private Trip mTrip;
     private EditText mTitleField;
     private Button mDateButton;
-    //    private CheckBox mSolvedCheckBox;
     private Spinner mTripType;
     private EditText mDestination;
     private EditText mDuration;
@@ -74,15 +76,9 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        TripLab.get(getActivity()).updateTrip(mTrip);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         UUID tripId = (UUID) getActivity().getIntent().getSerializableExtra(MainActivity.EXTRA_TRIP_ID);
         mTrip = TripLab.get(getActivity()).getTrip(tripId);
@@ -93,61 +89,57 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
                 .build();
 
         mClient = new GoogleApiClient.Builder(getActivity())
-
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
             @Override
             public void onConnected (Bundle bundle){
                 getActivity().invalidateOptionsMenu();
+                onConnectedLocation();
+
             }
             @Override
             public void onConnectionSuspended (int i){
             }
         })
                 .build();
-
     }
 
-    @Override
-    public void onConnectionSuspended (int i){
-    }
-
-    @Override
-    public void onConnected(final Bundle connectionHint) {
+    private void onConnectedLocation() {
         LocationRequest request = LocationRequest.create();
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         request.setNumUpdates(1);
         request.setInterval(0);
 
-
-        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission
-        .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-
+        getActivity().getBaseContext();
+        if (ActivityCompat.checkSelfPermission(getActivity(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission
+                        .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
 
+            LocationServices.FusedLocationApi.requestLocationUpdates(mClient, request,
+                    new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location){
+                    Log.d(TAG, "Got a fix: " + location);
 
+                    mTrip.setLatitude(Double.toString(location.getLatitude()));
+                    mTrip.setLongitude(Double.toString(location.getLongitude()));
 
-        LocationServices.FusedLocationApi.requestLocationUpdates(mClient,
-                request, new LocationListener() {
-                    @Override
-                    public void onLocationChanged(Location location) {
-                        Log.d(TAG, "got a fix: " + location);
-//                        mTrip.setLongitude(Longitude);
-                        double dLatitude = location.getLatitude();
-                        double dLongitude = location.getLongitude();
-                        String longitude = Double.toString(dLongitude);
-                        String latitude = Double.toString(dLatitude);
-                        mTrip.setLongitude(longitude);
-                        mTrip.setLatitude(latitude);
-                        mTrip.setLocation(location);
+                    Log.d(TAG, "onConnectedLocation() Latitude location in database: " +
+                            mTrip.getLatitude());
+                    Log.d(TAG, "onConnectedLocation() Longitude location in database: " +
+                            mTrip.getLongitude());
+                    updateLocation();
+                }
+            });
 
-
-                    }
-                });
-
+        }
+    private void updateLocation() {
+        mLocationButton.setText("Latitude: " + mTrip.getLatitude() + ", Longitude: " +
+        mTrip.getLongitude());
     }
 
     @Override
@@ -155,24 +147,24 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
         super.onStart();
         getActivity().invalidateOptionsMenu();
         mClient.connect();
-
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        TripLab.get(getActivity()).updateTrip(mTrip);
+    }
+
     @Override
     public void onStop() {
         super.onStop();
         mClient.disconnect();
-
     }
-
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_trip, container, false);
- //       View f = inflater.inflate(R.layout.view_camera_and_title, container, false);
 
         mTitleField = (EditText) v.findViewById(R.id.trip_title);
         mTitleField.setText(mTrip.getTitle());
@@ -186,13 +178,12 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-
+                mTrip.setTitle(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                mTrip.setTitle(s.toString());
-                Log.d("aaaaa", "on text change" + mTrip.getTitle());
+                Log.d("test", "on text change" + mTrip.getTitle());
             }
         });
 
@@ -338,22 +329,27 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
 
         mLocationButton = (Button) v.findViewById(R.id.trip_location_button);
         mLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
                 // Create a Uri from an intent string. Use the result to create an Intent.
-//                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
-//                Uri gmmIntentUri = Uri.parse("geo: 46.414382,10.013988");
-                Uri gmmIntentUri = Uri.parse("geo: " + mTrip.getLatitude() + ", " + mTrip.getLongitude());
+                String uriBegin = "geo:" +mTrip.getLatitude() + "," +mTrip.getLongitude();
+                String query = mTrip.getLatitude() + mTrip.getLongitude();
+                String encodedQuery = Uri.encode(query);
+                String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+                Uri uri = Uri.parse(uriString);
+//                Uri gmmIntentUri = Uri.parse("geo:" + mTrip.getLatitude() + "," + mTrip.getLongitude());
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?" + mTrip.getLatitude() + mTrip.getLongitude()));
 // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
-
-// Attempt to start an activity that can handle the Intent
-                startActivity(mapIntent);
+//                mapIntent.setPackage("com.google.android.apps.maps");
+                Log.d(TAG, "onCreateView() Latitude location in database: " + mTrip.getLatitude());
+                Log.d(TAG, "onCreateView() Longitude location in database: " + mTrip.getLongitude());
+                // Attempt to start an activity that can handle the Intent
+                startActivity(intent);
             }
         });
-
 
         return v;
     }
@@ -385,9 +381,5 @@ public class TripFragment extends Fragment implements AdapterView.OnItemSelected
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
-
-
-
-
 
 }

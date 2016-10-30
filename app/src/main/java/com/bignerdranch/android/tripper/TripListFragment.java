@@ -40,20 +40,6 @@ public class TripListFragment extends Fragment {
                 .findViewById(R.id.trip_recycler_view);
         mTripRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
-//        mNewButton = (Button) view.findViewById(R.id.new_trip_button);
-//        mNewButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Trip trip = new Trip();
-//                TripLab.get(getActivity()).addTrip(trip);
-//                Intent intent = MainActivity.newIntent(getActivity(), trip.getId());
-//                startActivity(intent);
-//
-//            }
-//        });
-
         updateUI();
 
         return view;
@@ -138,7 +124,6 @@ public class TripListFragment extends Fragment {
 
             Intent intent = MainActivity.newIntent(getActivity(), mTrip.getId());
             startActivity(intent);
-//TripViewActivity
         }
     }
 

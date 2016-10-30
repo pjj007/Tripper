@@ -81,19 +81,11 @@ public class TripLab {
 //        return null;
     }
 
-    public File getPhotoFile(Trip trip) {
-        File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        if (externalFilesDir == null) {
-            return null;
-        }
-
-        return new File(externalFilesDir, trip.getPhotoFilename());
-    }
 
     public void addTrip (Trip t) {
 
         ContentValues values = getContentValues(t);
+
 
         mDatabase.insert(TripDbSchema.TripTable.NAME, null, values);
         updateTrip(t);
@@ -145,6 +137,16 @@ public class TripLab {
 
 //        return cursor;
         return new TripCursorWrapper(cursor);
+    }
+
+    public File getPhotoFile(Trip trip) {
+        File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if (externalFilesDir == null) {
+            return null;
+        }
+
+        return new File(externalFilesDir, trip.getPhotoFilename());
     }
 
 }

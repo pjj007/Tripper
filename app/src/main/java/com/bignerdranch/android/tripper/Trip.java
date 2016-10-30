@@ -15,7 +15,6 @@ public class Trip {
     private UUID mId;
     private String mTitle;
     private Date mDate;
-//    private boolean mSolved;
     private String mTripType;
     private String mDestination;
     private String mDuration;
@@ -25,30 +24,6 @@ public class Trip {
     private Location mLocation;
 
     private ArrayList<String> mTripTypeList = new ArrayList<>();
-
-    public Location getLocation() {
-        return mLocation;
-    }
-
-    public void setLocation(Location location) {
-        mLocation = location;
-    }
-
-    public String getLongitude() {
-        return mLongitude;
-    }
-    public void setLongitude(String Longitude) {
-        mLongitude = Longitude;
-    }
-
-    public String getLatitude() {
-        return mLatitude;
-    }
-
-    public void setLatitude(String Latitude) {
-        mLatitude = Latitude;
-    }
-
 
 //    public TripType() {
 //        mTripTypeList.add("Work");
@@ -73,22 +48,19 @@ public class Trip {
     public Date getDate() {
         return mDate;
     }
+
     public void setDate(Date date) {
         mDate = date;
     }
-//    public boolean isSolved() {
-//        return mSolved;
-//    }
-//    public void setSolved(boolean solved) {
-//        mSolved = solved;
-//    }
 
     public UUID getId() {
         return mId;
     }
+
     public String getTitle() {
         return mTitle;
     }
+
     public void setTitle(String title) {
         mTitle = title;
     }
@@ -124,12 +96,37 @@ public class Trip {
     public String getComment() {
         return mComment;
     }
+
     public void setComment(String Comment) {
         mComment = Comment;
     }
 
     public String getPhotoFilename() {
         return "IMG_" + getId().toString() + ".jpg";
+    }
+
+    public Location getLocation() {
+        return mLocation;
+    }
+
+    public void setLocation(Location location) {
+        mLocation = location;
+    }
+
+    public String getLongitude() {
+        return mLongitude;
+    }
+
+    public void setLongitude(String Longitude) {
+        mLongitude = Longitude;
+    }
+
+    public String getLatitude() {
+        return mLatitude;
+    }
+
+    public void setLatitude(String Latitude) {
+        mLatitude = Latitude;
     }
 
 }
