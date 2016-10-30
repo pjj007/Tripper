@@ -1,5 +1,7 @@
 package com.bignerdranch.android.tripper;
 
+import android.location.Location;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -18,8 +20,35 @@ public class Trip {
     private String mDestination;
     private String mDuration;
     private String mComment;
+    private String mLatitude;
+    private String mLongitude;
+    private Location mLocation;
 
     private ArrayList<String> mTripTypeList = new ArrayList<>();
+
+    public Location getLocation() {
+        return mLocation;
+    }
+
+    public void setLocation(Location location) {
+        mLocation = location;
+    }
+
+    public String getLongitude() {
+        return mLongitude;
+    }
+    public void setLongitude(String Longitude) {
+        mLongitude = Longitude;
+    }
+
+    public String getLatitude() {
+        return mLatitude;
+    }
+
+    public void setLatitude(String Latitude) {
+        mLatitude = Latitude;
+    }
+
 
 //    public TripType() {
 //        mTripTypeList.add("Work");

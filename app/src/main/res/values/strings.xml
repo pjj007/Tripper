@@ -21,6 +21,11 @@
 
     <string name="new_trip">New Trip</string>
 
+    <string name="trip_location_label">Location</string>
+    <string name="trip_location_button">Show location</string>
+
+
+
     <string name="settings_name_label">Name</string>
     <string name="settings_sid_label">ID</string>
     <string name="settings_email_label">Email</string>

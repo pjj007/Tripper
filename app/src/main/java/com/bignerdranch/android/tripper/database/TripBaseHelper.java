@@ -28,7 +28,9 @@ public class TripBaseHelper extends SQLiteOpenHelper {
                 TripDbSchema.TripTable.Cols.TRIP_TYPE + ", " +
                 TripDbSchema.TripTable.Cols.DESTINATION + ", " +
                 TripDbSchema.TripTable.Cols.DURATION + ", " +
-                TripDbSchema.TripTable.Cols.COMMENT + ")"
+                TripDbSchema.TripTable.Cols.COMMENT + ", " +
+                TripDbSchema.TripTable.Cols.LATITUDE + ", " +
+                TripDbSchema.TripTable.Cols.LONGITUDE + ")"
         );
     }
 

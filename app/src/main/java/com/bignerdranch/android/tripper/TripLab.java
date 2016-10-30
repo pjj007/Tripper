@@ -127,6 +127,8 @@ public class TripLab {
         values.put(TripDbSchema.TripTable.Cols.DESTINATION, trip.getDestination());
         values.put(TripDbSchema.TripTable.Cols.DURATION, trip.getDuration());
         values.put(TripDbSchema.TripTable.Cols.COMMENT, trip.getComment());
+        values.put(TripDbSchema.TripTable.Cols.LONGITUDE, trip.getLongitude());
+        values.put(TripDbSchema.TripTable.Cols.LATITUDE, trip.getLatitude());
 
         return values;
     }

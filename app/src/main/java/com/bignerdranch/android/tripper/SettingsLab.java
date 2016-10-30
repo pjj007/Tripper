@@ -90,15 +90,6 @@ public class SettingsLab  {
                 new String[] {uuidString});
     }
 
-    public void deleteSettings (Settings settings) {
-        String uuidString = settings.getId().toString();
-        mDatabase.delete(
-                SettingsDbSchema.SettingsTable.NAME,
-                SettingsDbSchema.SettingsTable.Cols.UUID + " = ?",
-                new String[] {uuidString}
-        );
-    }
-
 
     private static ContentValues getContentValues(Settings setting) {
         ContentValues values = new ContentValues();

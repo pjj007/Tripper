@@ -138,7 +138,7 @@ public class TripListFragment extends Fragment {
 
             Intent intent = MainActivity.newIntent(getActivity(), mTrip.getId());
             startActivity(intent);
-
+//TripViewActivity
         }
     }
 

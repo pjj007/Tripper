@@ -17,6 +17,7 @@ public class SettingsDbSchema {
             public static final String GENDER = "gender";
             public static final String COMMENT = "comment";
 
+
         }
     }
 
